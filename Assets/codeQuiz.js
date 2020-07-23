@@ -11,7 +11,7 @@ const Questions = [
         b: "Sheryl Sandberg",
         c: "Brendan Eich"
       },
-      correctAnswer: "c"
+      correctAnswer: "Brendan Eich"
     },
     {
       question: "Which one of these is a JavaScript package manager?",
@@ -20,47 +20,77 @@ const Questions = [
         b: "TypeScript",
         c: "npm"
       },
-      correctAnswer: "c"
+      correctAnswer: "npm"
     },
     {
       question: "Which tool can you use to ensure code quality?",
       answers: {
-        a: "Angular",
+        a: "ESLint",
         b: "jQuery",
         c: "RequireJS",
-        d: "ESLint"
       },
-      correctAnswer: "d"
+      correctAnswer: "ESLint"
     }
   ];
 
 function buildQuiz(){
-    
+    // setTime();
     question = Questions[quesCount].question;
     var content = document.getElementById("content");
     chA=Questions[quesCount].answers.a;
     chB=Questions[quesCount].answers.b;
     chC=Questions[quesCount].answers.c;
+    answer = Questions[quesCount].correctAnswer;
     content.innerHTML="";
     content.innerHTML = "<h1>" + Questions[quesCount].question + "<br/></h1>";
-    // content.innerHTML += "<button>a: "+ chA + "<br></button>";
-    // content.innerHTML += "<button>b: "+ chB + "<br></button>";
-    // content.innerHTML += "<button>c: "+ chC + "<br></button>";
-    // content.innerHTML += "<label><button id = 'a' class= 'choices value='" + chA + "'</button></label><br>";
-    content.innerHTML += "<div><button id = 'a' class= 'choices' value='" + chA + "'>" +chA+"</button></div><br>";
-    content.innerHTML += "<div><button id = 'b' class= 'choices' value='" + chB + "'>" +chB+"</button></div><br>";
-    content.innerHTML += "<div><button id = 'c' class= 'choices' value='" + chC + "'>" +chC+"</button></div><br>";
+    content.innerHTML += "<div><button id = 'button1' onClick=checkAnswer(this) value='" + chA + "'>" +chA+ "</button></div><br>";
+    content.innerHTML += "<div><button id = 'button2' onClick=checkAnswer(this) value='" + chB + "'>" +chB+"</button></div><br>";
+    content.innerHTML += "<div><button id = 'button3' onClick=checkAnswer(this) value='" + chC + "'>" +chC+"</button></div><br>";
     quesCount++;
-    checkAnswer();
 } 
 
-function checkAnswer(){
-  
-}
+var score = 0;
+function checkAnswer(e){
 
+for(var i = 0; i < Questions.length; i++){
+  clicked = document.getElementById(e.id).value;
+  console.log(clicked);
+  console.log(answer);
+  if(clicked === answer){
+    score++
+  };
+  console.log(score);
+  buildQuiz();
+};
+showResults();
+}
 
 function showResults(){
   console.log(Questions.length)
+  var content = document.getElementById("content");
+  content.innerHTML="You scored: " + score + "out of " + Questions.length ;
+}
+
+var secondsLeft = 10;
+
+function setTime() {
+  var timerInterval = setInterval(function() {
+  secondsLeft--;
+  var content = document.getElementById("content");
+  var timeEl = document.createElement("div");
+  timeEl.textContent = secondsLeft + " seconds left till Quiz Ends.";
+  content.innerHTML=timeEl;
+  if(secondsLeft === 0) {
+    clearInterval(timerInterval);
+    sendMessage();
+  }
+
+  }, 1000);
+}
+
+function sendMessage() {
+  var content = document.getElementById("content");
+  content.innerHTML="Times Up!";
 }
 
 startquiz.addEventListener('click', buildQuiz);
