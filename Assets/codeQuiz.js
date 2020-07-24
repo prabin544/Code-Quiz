@@ -1,5 +1,5 @@
 var quiz = document.querySelector("#quiz");
-var results = document.querySelector("#results");
+var highScore = document.querySelector("#highScore");
 var startquiz = document.querySelector("#startquiz");
 var quesCount = 0;
 var score = 0;
@@ -33,13 +33,14 @@ const Questions = [{
 ];
 
 function buildQuiz() {
-  // setTime();
   if (quesCount >= Questions.length){
     var result = document.getElementById("content");
-    result.innerHTML = "You scored: " + score + "out of " + Questions.length;
+    result.innerHTML = "You scored: " + score + " out of " + Questions.length + "<br>";
+    var name = document.getElementById("content");
+    name.innerHTML += "First Name: <input type='text' id='myText' placeholder='Name'></input>";
   };
-  setTime();
-  // currQuestion = Questions[quesCount].question;
+  if(quesCount===0)
+    setTime();
   var content = document.getElementById("content");
   var chA = Questions[quesCount].answers.a;
   var chB = Questions[quesCount].answers.b;
@@ -71,7 +72,7 @@ function setTime() {
   var timerInterval = window.setInterval(function () {
     secondsLeft--;
     var Elspt = document.getElementById("time");
-    Elspt.innerHTML += secondsLeft + " seconds left till Quiz Ends.";
+    Elspt.innerHTML = secondsLeft + " seconds left till Quiz Ends.";
  
     if (secondsLeft === 0) {
       clearInterval(timerInterval);
@@ -85,7 +86,13 @@ function sendMessage() {
   var content = document.getElementById("content");
   content.innerHTML = "Times Up!";
   var result = document.getElementById("content");
-  result.innerHTML = "You scored: " + score + "out of " + Questions.length;
+  result.innerHTML = "You scored: " + score + "out of " + Questions.length + "<br>";
+  var name = document.getElementById("content");
+  name.innerHTML += "First Name: <input type='text' id='myText' placeholder='Name'></input>";
+  name.innerHTML += "<input type='button' onClick=(this) value='submit'/>";
+  highScore.innerHTML = "<h1>" + 
+  console.log(name);
+
 }
 
 startquiz.addEventListener('click', buildQuiz);
