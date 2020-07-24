@@ -1,5 +1,4 @@
 var quiz = document.querySelector("#quiz");
-var highScore = document.querySelector("#highScore");
 var startquiz = document.querySelector("#startquiz");
 var quesCount = 0;
 var score = 0;
@@ -89,10 +88,16 @@ function sendMessage() {
   result.innerHTML = "You scored: " + score + "out of " + Questions.length + "<br>";
   var name = document.getElementById("content");
   name.innerHTML += "First Name: <input type='text' id='myText' placeholder='Name'></input>";
-  name.innerHTML += "<input type='button' onClick=(this) value='submit'/>";
-  highScore.innerHTML = "<h1>" + 
+  name.innerHTML += "<input type='button' onClick=highScores(this) value='submit'/>";
   console.log(name);
+}
 
+function highScores(e){
+  var clickedName = document.getElementById("myText").value;
+  var highScore = document.getElementById("content");
+  highScore.innerHTML = "<h1> High Scores </h1>";
+  highScore.innerHTML += clickedName + ":" + score + "<br>";
+  highScore.innerHTML += "<input type='button' onClick=buildQuiz(this) value='reset'/>";
 }
 
 startquiz.addEventListener('click', buildQuiz);
