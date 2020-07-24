@@ -39,7 +39,7 @@ function buildQuiz() {
     name.innerHTML += "First Name: <input type='text' id='myText' placeholder='Name'></input>";
   };
   if(quesCount===0)
-    setTime();
+  setTime();
   var content = document.getElementById("content");
   var chA = Questions[quesCount].answers.a;
   var chB = Questions[quesCount].answers.b;
@@ -56,24 +56,26 @@ function buildQuiz() {
 function checkAnswer(e) {
   
   var clicked = document.getElementById(e.id).value;
-  console.log(clicked);
-  console.log(answer);
+
   if (clicked === answer) {
     score++
+  } else{
+    secondsLeft = secondsLeft - 5;
   };
-  console.log(score);
+
   buildQuiz();
 }
 
-var secondsLeft = 10;
+var secondsLeft = 60;
 
 function setTime() {
+
   var timerInterval = window.setInterval(function () {
     secondsLeft--;
     var Elspt = document.getElementById("time");
     Elspt.innerHTML = secondsLeft + " seconds left till Quiz Ends.";
  
-    if (secondsLeft === 0) {
+    if (secondsLeft === 0 || quesCount > Questions.length)  {
       clearInterval(timerInterval);
       sendMessage();
     }
@@ -83,12 +85,12 @@ function setTime() {
 
 function sendMessage() {
   var content = document.getElementById("content");
-  content.innerHTML = "Times Up!";
+  content.innerHTML = "<h1> Times Up! <h1><br>";
   var result = document.getElementById("content");
-  result.innerHTML = "You scored: " + score + "out of " + Questions.length + "<br>";
+  result.innerHTML += "You scored: " + score + " out of " + Questions.length + "<br>";
   var name = document.getElementById("content");
   name.innerHTML += "First Name: <input type='text' id='myText' placeholder='Name'></input>";
-  name.innerHTML += "<input type='button' onClick=highScores(this) value='submit'/>";
+  name.innerHTML += "<input type='button' onClick=highScores(this) value='submit'></input>";
   console.log(name);
 }
 
@@ -97,7 +99,7 @@ function highScores(e){
   var highScore = document.getElementById("content");
   highScore.innerHTML = "<h1> High Scores </h1>";
   highScore.innerHTML += clickedName + ":" + score + "<br>";
-  highScore.innerHTML += "<input type='button' onClick=buildQuiz(this) value='reset'/>";
+  highScore.innerHTML += "<input type='button' onClick=buildQuiz(this) value='reset'></input>";
 }
 
 startquiz.addEventListener('click', buildQuiz);
