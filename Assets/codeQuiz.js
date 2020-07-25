@@ -40,6 +40,7 @@ function buildQuiz() {
   };
   if(quesCount===0)
   setTime();
+  
   var content = document.getElementById("content");
   var chA = Questions[quesCount].answers.a;
   var chB = Questions[quesCount].answers.b;
@@ -54,7 +55,7 @@ function buildQuiz() {
 }
 
 function checkAnswer(e) {
-  
+
   var clicked = document.getElementById(e.id).value;
 
   if (clicked === answer) {
@@ -62,11 +63,16 @@ function checkAnswer(e) {
   } else{
     secondsLeft = secondsLeft - 5;
   };
-
+  if (quesCount < Questions.length && secondsLeft > 0){
   buildQuiz();
+  } else{
+    clearInterval(timerInterval);
+    sendMessage();
+  }
 }
 
-var secondsLeft = 60;
+var secondsLeft = 20;
+var timerInterval;
 
 function setTime() {
 
@@ -75,7 +81,7 @@ function setTime() {
     var Elspt = document.getElementById("time");
     Elspt.innerHTML = secondsLeft + " seconds left till Quiz Ends.";
  
-    if (secondsLeft === 0 || quesCount > Questions.length)  {
+    if (secondsLeft === 0)  {
       clearInterval(timerInterval);
       sendMessage();
     }
