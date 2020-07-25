@@ -5,4 +5,4 @@
 # User will be able to store their initials along with their score at the end.
 # This application can be accessed at https://prabin544.github.io/Code-Quiz/
 
-![Alt text](/?raw=true "Initial Page")
+![Alt text](/Assets/imgs/SS1.PNG?raw=true "Initial Page")
