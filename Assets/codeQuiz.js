@@ -84,6 +84,7 @@ function checkAnswer(e) {
   if (quesCount < Questions.length && secondsLeft > 0){
   buildQuiz();
   } else{
+    clearInterval(timerInterval);
     sendMessage();
   }
 }
@@ -92,14 +93,14 @@ var secondsLeft = 60;
 var timerInterval;
 
 function setTime() {
-  var timerInterval = window.setInterval(function () {
+  timerInterval = window.setInterval(function () {
     secondsLeft--;
     var Elspt = document.getElementById("time");
     Elspt.innerHTML = secondsLeft + " seconds left till Quiz Ends.";
-    // if (secondsLeft === 0)  {
-    //   clearInterval(timerInterval);
-    //   sendMessage();
-    // }
+    if (secondsLeft === 0 || secondsLeft < 0)  {
+      clearInterval(timerInterval);
+      sendMessage();
+    }
   }, 1000);
 }
 
@@ -111,6 +112,9 @@ function sendMessage() {
   var name = document.getElementById("content");
   name.innerHTML += "Enter Initials: <input type='text' id='myText' placeholder='initials'></input>";
   name.innerHTML += "<input type='button' onClick=highScores(this) value='submit'></input>";
+
+  var Elspt = document.getElementById("time");
+    Elspt.innerHTML = "";
 }
 
 function highScores(e){
