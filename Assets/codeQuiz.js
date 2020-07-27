@@ -32,20 +32,20 @@ const Questions = [{
   {
     question: "4. What is the correct syntax for referring to an external script called 'xxx.js'?",
     answers: {
-      a: "a",//"<script href = 'xxx.js'>",
-      b: "b",//"<script name = 'xxx.js'>",
-      c: "c",//"<script src = 'xxx.js'>",
+      a: "&#60script href = 'xxx.js'&#62",
+      b: "&#60script name = 'xxx.js'&#62",
+      c: "&#60script src = 'xxx.js'&#62",
     },
-    correctAnswer: "<script src = 'xxx.js'>"
+    correctAnswer: "&#60script src = 'xxx.js'&#62"
   },
   {
     question: "5. Inside which HTML element do we put the JavaScript?",
     answers: {
-      a: "a",//"'<script>'",
-      b: "b",//"'<js>'",
-      c: "c",//"'<javascript>'",
+      a: "&#60script&#62",
+      b: "&#60js&#62",
+      c: "&#60javascript&#62",
     },
-    correctAnswer: "<script>"
+    correctAnswer: "&#60script&#62"
   }
 ];
 
