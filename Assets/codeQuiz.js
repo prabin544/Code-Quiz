@@ -1,7 +1,7 @@
 var quiz = document.querySelector("#quiz");
 var startquiz = document.querySelector("#startquiz");
 var quesCount = 0;
-var score = 0;
+var score = localStorage.getItem("score");
 const Questions = [{
     question: "1. Who invented JavaScript?",
     answers: {
@@ -78,6 +78,7 @@ function checkAnswer(e) {
 
   if (clicked === answer) {
     score++
+    localStorage.setItem("score", score);
   } else{
     secondsLeft = secondsLeft - 5;
   };
