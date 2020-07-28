@@ -2,6 +2,9 @@ var quiz = document.querySelector("#quiz");
 var startquiz = document.querySelector("#startquiz");
 var quesCount = 0;
 var score = localStorage.getItem("score");
+var clickedName = localStorage.getItem("clickedName");
+
+
 const Questions = [{
     question: "1. Who invented JavaScript?",
     answers: {
@@ -79,6 +82,7 @@ function checkAnswer(e) {
   if (clicked === answer) {
     score++
     localStorage.setItem("score", score);
+    localStorage.setItem(clickedName, score);
   } else{
     secondsLeft = secondsLeft - 5;
   };
@@ -120,6 +124,7 @@ function sendMessage() {
 
 function highScores(e){
   var clickedName = document.getElementById("myText").value;
+  clickedName.textContent = clickedName;
   var highScore = document.getElementById("content");
   highScore.innerHTML = "<h1> High Scores </h1>";
   highScore.innerHTML += clickedName + ":" + score + "<br>";
