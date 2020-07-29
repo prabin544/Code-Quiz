@@ -1,7 +1,7 @@
 var quiz = document.querySelector("#quiz");
 var startquiz = document.querySelector("#startquiz");
 var quesCount = 0;
-var score = localStorage.getItem("score");
+var score = 0;
 var clickedName = localStorage.getItem("clickedName");
 
 
@@ -33,22 +33,22 @@ const Questions = [{
     correctAnswer: "ESLint"
   },
   {
-    question: "4. What is the correct syntax for referring to an external script called 'xxx.js'?",
+    question: "4. Which of the following is not a reserved word in JavaScript?",
     answers: {
-      a: "&#60script href = 'xxx.js'&#62",
-      b: "&#60script name = 'xxx.js'&#62",
-      c: "&#60script src = 'xxx.js'&#62",
+      a: "interface",
+      b: "throws",
+      c: "program",
     },
-    correctAnswer: "&#60script src = 'xxx.js'&#62"
+    correctAnswer: "program"
   },
   {
-    question: "5. Inside which HTML element do we put the JavaScript?",
+    question: "5. What is the HTML tag under which one can write the JavaScript code <.......>?",
     answers: {
-      a: "&#60script&#62",
-      b: "&#60js&#62",
-      c: "&#60javascript&#62",
+      a: "javascript",
+      b: "scripted",
+      c: "script",
     },
-    correctAnswer: "&#60script&#62"
+    correctAnswer: "script"
   }
 ];
 
@@ -57,7 +57,7 @@ function buildQuiz() {
     var result = document.getElementById("content");
     result.innerHTML = "You scored: " + score + " out of " + Questions.length + "<br>";
     var name = document.getElementById("content");
-    name.innerHTML += "First Name: <input type='text' id='myText' placeholder='Name'></input>";
+    name.innerHTML += "Enter Initials: <input type='text' id='myText' placeholder='Name'></input>";
   };
   if(quesCount===0)
   setTime();
@@ -82,7 +82,7 @@ function checkAnswer(e) {
   if (clicked === answer) {
     score++
     localStorage.setItem("score", score);
-    localStorage.setItem(clickedName, score);
+
   } else{
     secondsLeft = secondsLeft - 5;
   };
@@ -124,13 +124,14 @@ function sendMessage() {
 
 function highScores(e){
   var clickedName = document.getElementById("myText").value;
-  clickedName.textContent = clickedName;
+  clickedName = clickedName.textContent;
   var highScore = document.getElementById("content");
   highScore.innerHTML = "<h1> High Scores </h1>";
   highScore.innerHTML += clickedName + ":" + score + "<br>";
   highScore.innerHTML += "<input type='button' onClick=reset(this) value='reset'></input>";
 }
 function reset(e){
+
   location.href = "./index.html";
 }
 startquiz.addEventListener('click', buildQuiz);
